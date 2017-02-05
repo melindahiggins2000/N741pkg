@@ -1,0 +1,35 @@
+---
+title: "N741 Template 1"
+author: "Melinda K. Higgins, PhD."
+date: "February 5, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction and Overview
+
+Add an overview of your dataset and project
+
+## Load Data
+
+```{r}
+library(car)
+head(mtcars)
+```
+
+
+## Data Visualization
+
+Add code and plots here
+
+## Analysis
+
+Add models and descriptive stats here
+
+## Discussion
+
+Wrap up your discussion of your results here
+

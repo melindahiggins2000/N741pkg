@@ -16,4 +16,31 @@ and Jenny Bryan, http://stat545.com/packages00_index.html and  http://stat545.co
 6. it worked - asked if I wanted to update .Rproj, I said yes.
 7. saved and sync with Github
 
-8. 
+8. following Chester Ismay, create a skeleton directory - rm basictemplate since I'm in the N741pkg directory already getwd()
+
+dir.create("basictemplate/inst/rmarkdown/templates/report/skeleton",
+    recursive = TRUE)
+
+dir.create("./inst/rmarkdown/templates/report/skeleton",
+           recursive = TRUE)
+
+9. yes, this worked.
+
+10. create skeleton.Rmd in the C:\MyGithub\N741pkg\inst\rmarkdown\templates\report\skeleton
+11. create template.yaml in the directory above this one - in this directory C:\MyGithub\N741pkg\inst\rmarkdown\templates\report 
+
+12. next install package devtools::install("N741pkg") - but you need to be in the folder above the package folder
+
+setwd("C:/MyGithub/")
+devtools::install("N741pkg")
+
+13. now if you go to FIle/New Markdown/From template you should see N741 Template 01 from the N741pkg.
+
+
+
+
+
+
+
+
+
