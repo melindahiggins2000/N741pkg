@@ -1,3 +1,17 @@
+#' Table of summary stats for a numeric variable.
+#'
+#' Create a table of summary statistics
+#' for a numeric variable in a data frame.
+#'
+#' @param df a data.frame.
+#' @param var a vector in a data.frame df$var.
+#' @param l a character vector used as a label
+#' @return \code{t} the summary statistics table.
+#' @examples
+#' a <- runif(10,0,1)
+#' b <- c("a","b","c","d","a","a","b","b","c","c")
+#' x <- data.frame(a,b)
+#' tbl.continuous(x,x$a,"label")
 tbl.continuous <- function(df,var,l){
   t <- df %>%
     summarise(item = l,
