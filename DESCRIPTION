@@ -1,9 +1,9 @@
 Package: N741pkg
-Title: What the Package Does (one line, title case)
+Title: Package of R Functions and Rmarkdown Templates for N741
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Melinda", "Higgins", email = "mkhiggi@emory.edu", role = c("aut", "cre"))
+Description: This package was created for N741 Big Data Analytics for Healthcare. It contains functions and Rmarkdown templates helpful in this course.
 Depends: R (>= 3.3.2)
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

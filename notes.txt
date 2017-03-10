@@ -36,8 +36,14 @@ devtools::install("N741pkg")
 
 13. now if you go to FIle/New Markdown/From template you should see N741 Template 01 from the N741pkg.
 
+14. exit - open new R session and check - package is there and we can still see the markdown package template N741pkg
+
+----- more notes -----
+
+technically this package has not been built
 
 
+see more at Jenny Bryan's site http://stat545.com/packages06_foofactors-package.html
 
 
 
