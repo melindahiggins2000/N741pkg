@@ -12,7 +12,7 @@ tbl.cat(gdf, var)
 \item{var}{a vector in a data.frame df$var.}
 }
 \value{
-\code{t1} the summary statistics table.
+\code{t} the frequency and percents table.
 }
 \description{
 Create a table of summary statistics
@@ -22,6 +22,7 @@ for a categorical variable in a data frame.
 a <- runif(10,0,1)
 b <- c("a","b","c","d","a","a","b","b","c","c")
 x <- data.frame(a,b)
-tbl.cat(x,x$b)
+gx <- dplyr::group_by(x,b)
+tbl.cat(gx,gx$b)
 }
 
