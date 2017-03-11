@@ -1,6 +1,8 @@
 # N741pkg
 
-N741 Package of R code and templates for course
+[![Build Status](https://travis-ci.org/melindahiggins2000/N741pkg.svg?branch=master)](https://travis-ci.org/melindahiggins2000/N741pkg)
+
+## N741 Package of R code and templates for course
 
 Install from Github
 
