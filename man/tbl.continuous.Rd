@@ -26,4 +26,3 @@ b <- c("a","b","c","d","a","a","b","b","c","c")
 x <- data.frame(a,b)
 tbl.continuous(x,x$a,"label")
 }
-

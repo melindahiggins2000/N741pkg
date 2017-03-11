@@ -25,4 +25,3 @@ x <- data.frame(a,b)
 gx <- dplyr::group_by(x,b)
 tbl.cat(gx,gx$b)
 }
-
