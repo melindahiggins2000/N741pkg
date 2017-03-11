@@ -11,7 +11,7 @@ tbl.continuous(df, var, l)
 
 \item{var}{a vector in a data.frame df$var.}
 
-\item{l}{a character vector used as a label}
+\item{l}{a character vector for a label.}
 }
 \value{
 \code{t} the summary statistics table.
@@ -24,5 +24,5 @@ for a numeric variable in a data frame.
 a <- runif(10,0,1)
 b <- c("a","b","c","d","a","a","b","b","c","c")
 x <- data.frame(a,b)
-tbl.continuous(x,x$a,"label")
+tbl.continuous(x,x$a,"label for var a")
 }

@@ -13,8 +13,9 @@
 #' gx <- dplyr::group_by(x,b)
 #' tbl.cat(gx,gx$b)
 tbl.cat <- function(gdf,var){
+  ss <- length(var)
   t <- dplyr::summarise(gdf,
                         freq = n(),
-                        pct = n()*100/10)
+                        pct = n()*100/ss)
   return(t)
 }

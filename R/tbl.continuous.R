@@ -5,13 +5,13 @@
 #'
 #' @param df a data.frame.
 #' @param var a vector in a data.frame df$var.
-#' @param l a character vector used as a label
+#' @param l a character vector for a label.
 #' @return \code{t} the summary statistics table.
 #' @examples
 #' a <- runif(10,0,1)
 #' b <- c("a","b","c","d","a","a","b","b","c","c")
 #' x <- data.frame(a,b)
-#' tbl.continuous(x,x$a,"label")
+#' tbl.continuous(x,x$a,"label for var a")
 tbl.continuous <- function(df,var,l){
   t <- dplyr::summarise(df,
                         item = l,

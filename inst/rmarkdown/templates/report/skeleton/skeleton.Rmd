@@ -24,15 +24,15 @@ library(N741pkg)
 
 ## Abstract
 
-_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please provide an abstract with only a sentence or two on the purpose of your project, your research questions, analysis methods, results, and conclusions._
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please provide an abstract with only a sentence or two each on these items: the purpose of your project, your research questions, analysis methods, results, and conclusions (approximately 300 words)._
 
 ## Introduction
 
-_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please describe the motivation and purpose of your project including your research questions and objectives. Hint: look back at what you submitted for Milestone 1_
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please describe: the motivation and purpose of your project including your research questions and objectives. Hint: look back at what you submitted for Milestone 1._
 
 ## Dataset Description and Summary
 
-_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please provide a description of your dataset and where you obtained your dataset (link to repository or other references). Include an overview of the variables or measures included in your dataset and which ones you are conceptualizing as covariates, predictors or outcomes as related to your research questions and final analysis models. Include any data "pre-processing" steps or "cleaning" you had to do (data "tidying"", handling of outliers or unusual values, addressing missing data, etc) or any subsetting you did (selecting specific rows or columns) - for example, if you didn't use the complete dataset, please describe which variables were selected any why and any cases (rows) that were selected any why (e.g. only children from ages 6-17 were chosen because...)._
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please provide a description of your dataset and where you obtained your dataset (link to repository or other references). Include an overview of the variables or measures included in your dataset and which ones you are conceptualizing as covariates, predictors or outcomes as related to your research questions and final analysis models. Include any data "pre-processing" steps or "cleaning" you had to do (data "tidying", handling of outliers or unusual values, addressing missing data, etc) or any subsetting you did (selecting specific rows or columns) - for example, if you didn't use the complete dataset, please describe which variables were selected any why and any cases (rows) that were selected any why (e.g. only children from ages 6-17 were chosen because...)._
 
 ```{r}
 # view the top rows of the mtcars dataset in the car package
@@ -46,6 +46,44 @@ knitr::kable(head(mtcars),
 ## Dataset Summary and Visualization
 
 _TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Add tables (descriptive statistics for both numeric and categorical variables) and plots here to help decribe and visualize the key elements in your project dataset. Hint: look back at what you submitted for Milestone 2_
+
+### Example Summary Statistics Table - Numeric Variables
+
+_DELETE THIS FOR FINAL REPORT: This is an example summary statistics table for continuous/numeric variables in the mtcars dataset (Henderson and Velleman, 1981)._
+
+```{r}
+m <- mtcars
+t1 <- N741pkg::tbl.continuous(m,m$mpg,"Miles per Gallon")
+t2 <- N741pkg::tbl.continuous(m,m$disp,"Engine Displacement")
+t3 <- N741pkg::tbl.continuous(m,m$wt,"Car Weight")
+t4 <- N741pkg::tbl.continuous(m,m$hp,"Horsepower")
+t5 <- N741pkg::tbl.continuous(m,m$qsec,"1/4 mile time")
+knitr::kable(rbind(t1,t2,t3,t4,t5),
+             caption = "Table of Summary Stats for Numeric Variables in mtcars")
+```
+
+### Example Summary Statistics Table - Categorical Variables
+
+_DELETE THIS FOR FINAL REPORT: These are examples of frequency tables for categorical/ordinal variables in the mtcars dataset._
+
+```{r}
+gm <- dplyr::group_by(m,cyl)
+t1 <- N741pkg::tbl.cat(gm,gm$cyl)
+knitr::kable(t1,
+             caption = "Frequency Table for Number of Cylinders")
+gm <- dplyr::group_by(m,am)
+t1 <- N741pkg::tbl.cat(gm,gm$am)
+knitr::kable(t1,
+             caption = "Frequency Table for Transmission")
+gm <- dplyr::group_by(m,gear)
+t1 <- N741pkg::tbl.cat(gm,gm$gear)
+knitr::kable(t1,
+             caption = "Frequency Table for Number of Forward Gears")
+```
+
+### Example plot
+
+_DELETE THIS FOR FINAL REPORT: This is an example scatterplot from the mtcars dataset. The plot is of the mpg by car weight with colors by the number of cylinders used as a grouping variable. Note: as.factor() was used to treat cyl as a factor for grouping._
 
 ```{r}
 # example plot using mtcars dataset
@@ -79,4 +117,7 @@ _TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please describe any limi
 ## References
 
 _TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please provide any references or citations relevant to your report here. DO NOT worry about the formatting of these citations, just be sure to list the usual citation components._
+
+Henderson and Velleman (1981), Building multiple regression models interactively. Biometrics, 37, 391–411.
+
 
