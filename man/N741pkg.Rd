@@ -4,7 +4,7 @@
 \name{N741pkg}
 \alias{N741pkg}
 \alias{N741pkg-package}
-\title{N741pkg: package for N741 course}
+\title{N741pkg: A package for N741 course.}
 \description{
 N741pkg provides a few useful functions and a
 template for reports and analyses in N741 course.

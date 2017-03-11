@@ -1,4 +1,4 @@
-#' N741pkg: package for N741 course
+#' N741pkg: A package for N741 course.
 #'
 #' N741pkg provides a few useful functions and a
 #' template for reports and analyses in N741 course.
