@@ -6,30 +6,77 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# knitr chunk options set to prevent
+# code, warnings and messages from being
+# shown in your final document
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+
+# libraries - remember to load all
+# of the packages needed for your R code in this
+# R markdown document (RMD) to run and compile
+# here are a few to get you started
+library(rmarkdown)
+library(knitr)
+library(N741pkg)
 ```
 
-## Introduction and Overview
+## Abstract
 
-Add an overview of your dataset and project
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please provide an abstract with only a sentence or two on the purpose of your project, your research questions, analysis methods, results, and conclusions._
 
-## Load Data
+## Introduction
+
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please describe the motivation and purpose of your project including your research questions and objectives. Hint: look back at what you submitted for Milestone 1_
+
+## Dataset Description and Summary
+
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please provide a description of your dataset and where you obtained your dataset (link to repository or other references). Include an overview of the variables or measures included in your dataset and which ones you are conceptualizing as covariates, predictors or outcomes as related to your research questions and final analysis models. Include any data "pre-processing" steps or "cleaning" you had to do (data "tidying"", handling of outliers or unusual values, addressing missing data, etc) or any subsetting you did (selecting specific rows or columns) - for example, if you didn't use the complete dataset, please describe which variables were selected any why and any cases (rows) that were selected any why (e.g. only children from ages 6-17 were chosen because...)._
 
 ```{r}
+# view the top rows of the mtcars dataset in the car package
+# put the information from head(mtcars) into a table
+# using knitr::kable()
 library(car)
-head(mtcars)
+knitr::kable(head(mtcars),
+             caption="Top rows of the mtcars dataset")
 ```
 
+## Dataset Summary and Visualization
 
-## Data Visualization
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Add tables (descriptive statistics for both numeric and categorical variables) and plots here to help decribe and visualize the key elements in your project dataset. Hint: look back at what you submitted for Milestone 2_
 
-Add code and plots here
+```{r}
+# example plot using mtcars dataset
+# scatterplot of mpg by car weight
+# points colored by number of cylinders as a factor
+# then linear model fit lines are added by
+# cylinder group. FInally a main title, axis labels
+# and a title for the legend are added.
+library(ggplot2)
+ggplot(mtcars, aes(x=wt, y=mpg, colour=as.factor(cyl))) +
+  geom_point() +
+  geom_smooth(method=lm) +
+  ggtitle("MPG by Car Weight Grouped by Number of Cylinders") +
+  xlab("Car Weight (in 1000 lbs)") +
+  ylab("Miles per (US) Gallons") +
+  guides(colour = guide_legend(title = "Cylinders"))
+```
 
-## Analysis
+## Methods and Analysis 
 
-Add models and descriptive stats here
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: For each of your research questions, please state what statistical analysis methods or models you used to "test" or answer each question. Be sure to also state what assumptions were made and how you checked your assumptions. Then provide the results of each statistical test or model and write your interpretation of these results._
 
-## Discussion
+## Discussion and Conclusions
 
-Wrap up your discussion of your results here
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Given your original research questions and results, write a summary of what was found and any conclusions drawn._ 
+
+## Limitations
+
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please describe any limitations related to your dataset, original versus possibly revised research questions, and conclusions drawn (underlying assumptions, inherent bias, potential confounders, lack of generalizability, or other issues that could not be resolved or addressed)._
+
+## References
+
+_TYPE IN YOUR TEXT HERE - DELETE THIS FOR FINAL REPORT: Please provide any references or citations relevant to your report here. DO NOT worry about the formatting of these citations, just be sure to list the usual citation components._
 
