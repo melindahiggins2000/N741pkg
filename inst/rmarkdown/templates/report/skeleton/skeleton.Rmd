@@ -1,7 +1,7 @@
 ---
-title: "N741 Template 1"
-author: "Melinda K. Higgins, PhD."
-date: "February 5, 2017"
+title: "N741 Final Project"
+author: "Your Name Here"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 

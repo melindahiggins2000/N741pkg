@@ -28,9 +28,13 @@ for a numeric variable
 The N741pkg package has the following goals:
 
 \itemize{
-\item to provide a Rmarkdown template.
-\item goal 2.
-\item goal 3.
+\item to provide a Rmarkdown template to provide an
+outline and structure for the final project analyses
+and report - available in RStudio under File menu,
+New File, R Markdown, From Template, scroll to
+find "N741 Final Project".
+\item to provide functions for creating tables for
+numeric data and categorical data.
 }
 
 To learn more about N741pkg, start with the vignettes:
