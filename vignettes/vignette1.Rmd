@@ -1,5 +1,5 @@
 ---
-title: "Vignette Demo the Functions in N741pkg"
+title: "N741pkg Vignette - Demonstration of the Functions"
 author: "Melinda K Higgins"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -9,39 +9,93 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Functions Included
+
+To date, this `N741pkg` package includes 2 functions `tbl.continuous` and `tbl.cat` for creating summary statistics tables for numeric (continuous) data and categorical (or ordinal) variables.
+
+### Creating summary statistics tables for numeric (continuous) variables
+
+The `tbl.continuous` function will work for any numeric variable. Ideally, you will run these statistics on continuous measures but can compute these summary statistics for ordinal data as well. The resulting `data.frame` output from this function can be used easily with `knitr::kable()` to create a table of summary statistics. This summary includes both informative descriptives (sample size, missing data, minimum, maximum), parametric statistics (mean, standard deviation), and non-parametric statistics (median, 25th and 75th percentile for the interquartile range).
+
+* `tbl.continuous(x,x$a,"label for var a")`
+    - This function creates a table of summary statistics for a numeric variable in a data frame.
+    - There are 3 arguments you need to provide:
+        - a data.frame, `df`
+        - a column variable from the data.frame `df$var`
+        - a character vector to serve as a label for the variable `"var label"`
+    - The returned table is a `data.frame` object with 1 row and 10 variables/columns. These 10 columns include:
+        - `item`: the variable label provided
+        - `n`: the number of non-missing values
+        - `missing`: the number of missing values
+        - `min`: the minimum value
+        - `avg`: the average/mean value
+        - `SD`: the standard deviation of the values
+        - `median`: the median value
+        - `Q1`: the 25th percentile (1st quartile) of the values
+        - `Q3`: the 75th percentile (3rd quartile) of the values
+        - `max`: the maximum value
+        
+### Example using the `mtcars` dataset with `tbl.continuous`
+
+Using the `mtcars` built-in dataset, you can create separate `data.frame` object "tables" (t1, t2, ...) and then combine these using `rbind()` (bind data.frame objects together by rows) to make a bigger `data.frame` containing the summary stats for multiple variables at once which can be printed using `knitr::kable()`. Each row of the resulting table is a different variable (column) containing the summary statistics for that variable.
+
+```{r}
+m <- mtcars
+t1 <- N741pkg::tbl.continuous(m,m$mpg,"Miles per Gallon")
+t2 <- N741pkg::tbl.continuous(m,m$disp,"Engine Displacement")
+t3 <- N741pkg::tbl.continuous(m,m$wt,"Car Weight")
+t4 <- N741pkg::tbl.continuous(m,m$hp,"Horsepower")
+t5 <- N741pkg::tbl.continuous(m,m$qsec,"1/4 mile time")
+knitr::kable(rbind(t1,t2,t3,t4,t5),
+             caption = "Table of Summary Stats for Numeric Variables in mtcars")
+```
+
+        
+### Creating summary statistics tables for categorical (or ordinal) variables
+        
+* `tbl.cat(gx,gx$b)`
+    - This function creates a table of summary statistics (frequencies and percents) for a categorical (or ordinal) variable in a data frame.
+    - There are 2 arguments you need to provide:
+        - a "grouped" data.frame, `gdf` **SEE NOTE**
+        - a column variable from the "grouped" data.frame `gdf$var`
+    - **NOTE** A "grouped" data.frame can be created using the `dplyr::group_by()` function. See the example provided with `help(tbl.cat)`. You need to "group_by" the categorical (or ordinal) variable you want to make the table for.
+    - The returned table is a `data.frame` object with 1 row and 3 variables/columns. These 3 columns include:
+        - `var`: the categorical variable categories or ordinal levels
+        - `freq`: the frequencies (or counts) for each category or level
+        - `pct`: the percentage of the total number of rows - these percents are NOT adjusted for missing. However, the frequency and percentage of `NA`s are provided.
+        
+### Example using the `mtcars` dataset with `tbl.cat`
+
+In the `mtcars` dataset, there are several ordinal variables for which running frequency summaries is useful. Let's run frequency summaries for:
+
+* `cyl` "Number of Cylinders"
+* `am` "Transmission (0=automatic, 1=manual)"
+* `gear` "Number of forward gears"
+
+```{r}
+# create grouped data.frame of m by cylinders
+gm <- dplyr::group_by(m,cyl)
+t1 <- N741pkg::tbl.cat(gm,gm$cyl)
+knitr::kable(t1,
+             caption = "Frequency Table for Number of Cylinders")
+
+# create grouped data.frame of m by am
+gm <- dplyr::group_by(m,am)
+t1 <- N741pkg::tbl.cat(gm,gm$am)
+knitr::kable(t1,
+             caption = "Frequency Table for Transmission")
+
+# create grouped data.frame of m by gear
+gm <- dplyr::group_by(m,gear)
+t1 <- N741pkg::tbl.cat(gm,gm$gear)
+knitr::kable(t1,
+             caption = "Frequency Table for Number of Forward Gears")
+```
+
+
+## Generic Vignette information - included for further examples
+
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-## test a continuous var table
-
-```{r}
-library(N741pkg)
-a <- runif(10,0,1)
-b <- c("a","b","c","d","a","a","b","b","c","c")
-x <- data.frame(a,b)
-c <- c("blue","blue","blue","blue","red",
-       "green","green","green","black","orange")
-d <- c(2,40,3,NA,5,1,2,4,3,NA)
-x <- data.frame(a,b,c,d)
-
-knitr::kable(x)
-
-t <- N741pkg::tbl.continuous(x,x$d,"label ddd")
-knitr::kable(t)
-```
-
-
-## test categorical table
-
-```{r}
-gx <- dplyr::group_by(x,c)
-t <- N741pkg::tbl.cat(gx,gx$c)
-knitr::kable(t)
-
-gx <- dplyr::group_by(x,as.factor(d))
-t <- N741pkg::tbl.cat(gx,gx$d)
-knitr::kable(t)
-
-```
 
 - Never uses retina figures
 - Has a smaller default figure size
