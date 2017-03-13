@@ -23,6 +23,8 @@ for a numeric variable in a data frame.
 \examples{
 a <- runif(10,0,1)
 b <- c("a","b","c","d","a","a","b","b","c","c")
-x <- data.frame(a,b)
+d <- c(1.1,2.2,3.3,NA,5.5,6.6,NA,8.8,9.9,NA)
+x <- data.frame(a,b,d)
 tbl.continuous(x,x$a,"label for var a")
+tbl.continuous(x,x$d,"label for var d")
 }

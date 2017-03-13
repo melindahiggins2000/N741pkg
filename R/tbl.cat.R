@@ -9,9 +9,12 @@
 #' @examples
 #' a <- runif(10,0,1)
 #' b <- c("a","b","c","d","a","a","b","b","c","c")
-#' x <- data.frame(a,b)
-#' gx <- dplyr::group_by(x,b)
-#' tbl.cat(gx,gx$b)
+#' c <- c("a",NA,"c","d","a","a","b","b","c",NA)
+#' x <- data.frame(a,b,c)
+#' gb <- dplyr::group_by(x,b)
+#' gc <- dplyr::group_by(x,c)
+#' tbl.cat(gb,gb$b)
+#' tbl.cat(gc,gc$c)
 tbl.cat <- function(gdf,var){
   ss <- length(var)
   t <- dplyr::summarise(gdf,
