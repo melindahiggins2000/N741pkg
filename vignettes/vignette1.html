@@ -12,9 +12,9 @@
 
 <meta name="author" content="Melinda K Higgins" />
 
-<meta name="date" content="2017-03-11" />
+<meta name="date" content="2017-03-13" />
 
-<title>Vignette Demo the Functions in N741pkg</title>
+<title>N741pkg Vignette - Demonstration of the Functions</title>
 
 
 
@@ -68,100 +68,57 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">Vignette Demo the Functions in N741pkg</h1>
+<h1 class="title toc-ignore">N741pkg Vignette - Demonstration of the Functions</h1>
 <h4 class="author"><em>Melinda K Higgins</em></h4>
-<h4 class="date"><em>2017-03-11</em></h4>
+<h4 class="date"><em>2017-03-13</em></h4>
 
 
 
-<p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
-<div id="test-a-continuous-var-table" class="section level2">
-<h2>test a continuous var table</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(N741pkg)
-a &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">1</span>)
-b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;c&quot;</span>)
-x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(a,b)
-c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>,
-       <span class="st">&quot;green&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;orange&quot;</span>)
-d &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">40</span>,<span class="dv">3</span>,<span class="ot">NA</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="ot">NA</span>)
-x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(a,b,c,d)
-
-knitr::<span class="kw">kable</span>(x)</code></pre></div>
+<div id="functions-included" class="section level2">
+<h2>Functions Included</h2>
+<p>To date, this <code>N741pkg</code> package includes 2 functions <code>tbl.continuous</code> and <code>tbl.cat</code> for creating summary statistics tables for numeric (continuous) data and categorical (or ordinal) variables.</p>
+<div id="creating-summary-statistics-tables-for-numeric-continuous-variables" class="section level3">
+<h3>Creating summary statistics tables for numeric (continuous) variables</h3>
+<p>The <code>tbl.continuous</code> function will work for any numeric variable. Ideally, you will run these statistics on continuous measures but can compute these summary statistics for ordinal data as well. The resulting <code>data.frame</code> output from this function can be used easily with <code>knitr::kable()</code> to create a table of summary statistics. This summary includes both informative descriptives (sample size, missing data, minimum, maximum), parametric statistics (mean, standard deviation), and non-parametric statistics (median, 25th and 75th percentile for the interquartile range).</p>
+<ul>
+<li><code>tbl.continuous(x,x$a,&quot;label for var a&quot;)</code>
+<ul>
+<li>This function creates a table of summary statistics for a numeric variable in a data frame.</li>
+<li>There are 3 arguments you need to provide:
+<ul>
+<li>a data.frame, <code>df</code></li>
+<li>a column variable from the data.frame <code>df$var</code></li>
+<li>a character vector to serve as a label for the variable <code>&quot;var label&quot;</code></li>
+</ul></li>
+<li>The returned table is a <code>data.frame</code> object with 1 row and 10 variables/columns. These 10 columns include:
+<ul>
+<li><code>item</code>: the variable label provided</li>
+<li><code>n</code>: the number of non-missing values</li>
+<li><code>missing</code>: the number of missing values</li>
+<li><code>min</code>: the minimum value</li>
+<li><code>avg</code>: the average/mean value</li>
+<li><code>SD</code>: the standard deviation of the values</li>
+<li><code>median</code>: the median value</li>
+<li><code>Q1</code>: the 25th percentile (1st quartile) of the values</li>
+<li><code>Q3</code>: the 75th percentile (3rd quartile) of the values</li>
+<li><code>max</code>: the maximum value</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="example-using-the-mtcars-dataset-with-tbl.continuous" class="section level3">
+<h3>Example using the <code>mtcars</code> dataset with <code>tbl.continuous</code></h3>
+<p>Using the <code>mtcars</code> built-in dataset, you can create separate <code>data.frame</code> object “tables” (t1, t2, …) and then combine these using <code>rbind()</code> (bind data.frame objects together by rows) to make a bigger <code>data.frame</code> containing the summary stats for multiple variables at once which can be printed using <code>knitr::kable()</code>. Each row of the resulting table is a different variable (column) containing the summary statistics for that variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span>mtcars
+t1 &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.continuous</span>(m,m$mpg,<span class="st">&quot;Miles per Gallon&quot;</span>)
+t2 &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.continuous</span>(m,m$disp,<span class="st">&quot;Engine Displacement&quot;</span>)
+t3 &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.continuous</span>(m,m$wt,<span class="st">&quot;Car Weight&quot;</span>)
+t4 &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.continuous</span>(m,m$hp,<span class="st">&quot;Horsepower&quot;</span>)
+t5 &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.continuous</span>(m,m$qsec,<span class="st">&quot;1/4 mile time&quot;</span>)
+knitr::<span class="kw">kable</span>(<span class="kw">rbind</span>(t1,t2,t3,t4,t5),
+             <span class="dt">caption =</span> <span class="st">&quot;Table of Summary Stats for Numeric Variables in mtcars&quot;</span>)</code></pre></div>
 <table>
-<thead>
-<tr class="header">
-<th align="right">a</th>
-<th align="left">b</th>
-<th align="left">c</th>
-<th align="right">d</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">0.7757520</td>
-<td align="left">a</td>
-<td align="left">blue</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="right">0.6294285</td>
-<td align="left">b</td>
-<td align="left">blue</td>
-<td align="right">40</td>
-</tr>
-<tr class="odd">
-<td align="right">0.0802238</td>
-<td align="left">c</td>
-<td align="left">blue</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="right">0.1325902</td>
-<td align="left">d</td>
-<td align="left">blue</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="right">0.0322909</td>
-<td align="left">a</td>
-<td align="left">red</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="right">0.8145312</td>
-<td align="left">a</td>
-<td align="left">green</td>
-<td align="right">1</td>
-</tr>
-<tr class="odd">
-<td align="right">0.4654547</td>
-<td align="left">b</td>
-<td align="left">green</td>
-<td align="right">2</td>
-</tr>
-<tr class="even">
-<td align="right">0.6623804</td>
-<td align="left">b</td>
-<td align="left">green</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="right">0.5815297</td>
-<td align="left">c</td>
-<td align="left">black</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="right">0.6007069</td>
-<td align="left">c</td>
-<td align="left">orange</td>
-<td align="right">NA</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.continuous</span>(x,x$d,<span class="st">&quot;label ddd&quot;</span>)
-knitr::<span class="kw">kable</span>(t)</code></pre></div>
-<table>
+<caption>Table of Summary Stats for Numeric Variables in mtcars</caption>
 <thead>
 <tr class="header">
 <th align="left">item</th>
@@ -178,110 +135,193 @@ knitr::<span class="kw">kable</span>(t)</code></pre></div>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">label ddd</td>
-<td align="right">8</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">7.5</td>
-<td align="right">13.19091</td>
-<td align="right">3</td>
-<td align="right">2</td>
-<td align="right">4.25</td>
-<td align="right">40</td>
+<td align="left">Miles per Gallon</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">10.400</td>
+<td align="right">20.09062</td>
+<td align="right">6.0269481</td>
+<td align="right">19.200</td>
+<td align="right">15.42500</td>
+<td align="right">22.80</td>
+<td align="right">33.900</td>
+</tr>
+<tr class="even">
+<td align="left">Engine Displacement</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">71.100</td>
+<td align="right">230.72188</td>
+<td align="right">123.9386938</td>
+<td align="right">196.300</td>
+<td align="right">120.82500</td>
+<td align="right">326.00</td>
+<td align="right">472.000</td>
+</tr>
+<tr class="odd">
+<td align="left">Car Weight</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">1.513</td>
+<td align="right">3.21725</td>
+<td align="right">0.9784574</td>
+<td align="right">3.325</td>
+<td align="right">2.58125</td>
+<td align="right">3.61</td>
+<td align="right">5.424</td>
+</tr>
+<tr class="even">
+<td align="left">Horsepower</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">52.000</td>
+<td align="right">146.68750</td>
+<td align="right">68.5628685</td>
+<td align="right">123.000</td>
+<td align="right">96.50000</td>
+<td align="right">180.00</td>
+<td align="right">335.000</td>
+</tr>
+<tr class="odd">
+<td align="left">1/4 mile time</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">14.500</td>
+<td align="right">17.84875</td>
+<td align="right">1.7869432</td>
+<td align="right">17.710</td>
+<td align="right">16.89250</td>
+<td align="right">18.90</td>
+<td align="right">22.900</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="test-categorical-table" class="section level2">
-<h2>test categorical table</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gx &lt;-<span class="st"> </span>dplyr::<span class="kw">group_by</span>(x,c)
-t &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.cat</span>(gx,gx$c)
-knitr::<span class="kw">kable</span>(t)</code></pre></div>
+<div id="creating-summary-statistics-tables-for-categorical-or-ordinal-variables" class="section level3">
+<h3>Creating summary statistics tables for categorical (or ordinal) variables</h3>
+<ul>
+<li><code>tbl.cat(gx,gx$b)</code>
+<ul>
+<li>This function creates a table of summary statistics (frequencies and percents) for a categorical (or ordinal) variable in a data frame.</li>
+<li>There are 2 arguments you need to provide:
+<ul>
+<li>a “grouped” data.frame, <code>gdf</code> <strong>SEE NOTE</strong></li>
+<li>a column variable from the “grouped” data.frame <code>gdf$var</code></li>
+</ul></li>
+<li><strong>NOTE</strong> A “grouped” data.frame can be created using the <code>dplyr::group_by()</code> function. See the example provided with <code>help(tbl.cat)</code>. You need to “group_by” the categorical (or ordinal) variable you want to make the table for.</li>
+<li>The returned table is a <code>data.frame</code> object with 1 row and 3 variables/columns. These 3 columns include:
+<ul>
+<li><code>var</code>: the categorical variable categories or ordinal levels</li>
+<li><code>freq</code>: the frequencies (or counts) for each category or level</li>
+<li><code>pct</code>: the percentage of the total number of rows - these percents are NOT adjusted for missing. However, the frequency and percentage of <code>NA</code>s are provided.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="example-using-the-mtcars-dataset-with-tbl.cat" class="section level3">
+<h3>Example using the <code>mtcars</code> dataset with <code>tbl.cat</code></h3>
+<p>In the <code>mtcars</code> dataset, there are several ordinal variables for which running frequency summaries is useful. Let’s run frequency summaries for:</p>
+<ul>
+<li><code>cyl</code> “Number of Cylinders”</li>
+<li><code>am</code> “Transmission (0=automatic, 1=manual)”</li>
+<li><code>gear</code> “Number of forward gears”</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create grouped data.frame of m by cylinders</span>
+gm &lt;-<span class="st"> </span>dplyr::<span class="kw">group_by</span>(m,cyl)
+t1 &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.cat</span>(gm,gm$cyl)
+knitr::<span class="kw">kable</span>(t1,
+             <span class="dt">caption =</span> <span class="st">&quot;Frequency Table for Number of Cylinders&quot;</span>)</code></pre></div>
 <table>
+<caption>Frequency Table for Number of Cylinders</caption>
 <thead>
 <tr class="header">
-<th align="left">c</th>
+<th align="right">cyl</th>
 <th align="right">freq</th>
 <th align="right">pct</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">black</td>
-<td align="right">1</td>
-<td align="right">10</td>
-</tr>
-<tr class="even">
-<td align="left">blue</td>
 <td align="right">4</td>
-<td align="right">40</td>
-</tr>
-<tr class="odd">
-<td align="left">green</td>
-<td align="right">3</td>
-<td align="right">30</td>
+<td align="right">11</td>
+<td align="right">34.375</td>
 </tr>
 <tr class="even">
-<td align="left">orange</td>
-<td align="right">1</td>
-<td align="right">10</td>
+<td align="right">6</td>
+<td align="right">7</td>
+<td align="right">21.875</td>
 </tr>
 <tr class="odd">
-<td align="left">red</td>
-<td align="right">1</td>
-<td align="right">10</td>
+<td align="right">8</td>
+<td align="right">14</td>
+<td align="right">43.750</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gx &lt;-<span class="st"> </span>dplyr::<span class="kw">group_by</span>(x,<span class="kw">as.factor</span>(d))
-t &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.cat</span>(gx,gx$d)
-knitr::<span class="kw">kable</span>(t)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create grouped data.frame of m by am</span>
+gm &lt;-<span class="st"> </span>dplyr::<span class="kw">group_by</span>(m,am)
+t1 &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.cat</span>(gm,gm$am)
+knitr::<span class="kw">kable</span>(t1,
+             <span class="dt">caption =</span> <span class="st">&quot;Frequency Table for Transmission&quot;</span>)</code></pre></div>
 <table>
+<caption>Frequency Table for Transmission</caption>
 <thead>
 <tr class="header">
-<th align="left">as.factor(d)</th>
+<th align="right">am</th>
 <th align="right">freq</th>
 <th align="right">pct</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">1</td>
-<td align="right">1</td>
-<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">19</td>
+<td align="right">59.375</td>
 </tr>
 <tr class="even">
-<td align="left">2</td>
-<td align="right">2</td>
-<td align="right">20</td>
-</tr>
-<tr class="odd">
-<td align="left">3</td>
-<td align="right">2</td>
-<td align="right">20</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
 <td align="right">1</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="left">5</td>
-<td align="right">1</td>
-<td align="right">10</td>
-</tr>
-<tr class="even">
-<td align="left">40</td>
-<td align="right">1</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="left">NA</td>
-<td align="right">2</td>
-<td align="right">20</td>
+<td align="right">13</td>
+<td align="right">40.625</td>
 </tr>
 </tbody>
 </table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create grouped data.frame of m by gear</span>
+gm &lt;-<span class="st"> </span>dplyr::<span class="kw">group_by</span>(m,gear)
+t1 &lt;-<span class="st"> </span>N741pkg::<span class="kw">tbl.cat</span>(gm,gm$gear)
+knitr::<span class="kw">kable</span>(t1,
+             <span class="dt">caption =</span> <span class="st">&quot;Frequency Table for Number of Forward Gears&quot;</span>)</code></pre></div>
+<table>
+<caption>Frequency Table for Number of Forward Gears</caption>
+<thead>
+<tr class="header">
+<th align="right">gear</th>
+<th align="right">freq</th>
+<th align="right">pct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">15</td>
+<td align="right">46.875</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">12</td>
+<td align="right">37.500</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">15.625</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="generic-vignette-information---included-for-further-examples" class="section level2">
+<h2>Generic Vignette information - included for further examples</h2>
+<p>Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The <code>html_vignette</code> output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The <code>html_vignette</code> format:</p>
 <ul>
 <li>Never uses retina figures</li>
 <li>Has a smaller default figure size</li>
