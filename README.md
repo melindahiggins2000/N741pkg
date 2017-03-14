@@ -14,7 +14,7 @@ Install from Github
 
 **NOTE 2:** This package also needs the `dplyr` package, be sure to also have `dplyr` installed, which is part of `tidyverse`.
 
-View [Vignette Demo](https://cdn.rawgit.com/melindahiggins2000/N741pkg/master/vignettes/vignette1.html)
+View [Vignette Demo](https://htmlpreview.github.io/?https://raw.githubusercontent.com/melindahiggins2000/N741pkg/master/vignettes/vignette1.html)
 
 ## Description
 
