@@ -6,13 +6,17 @@ Package Last Updated: 03-13-2017
 
 ## N741 Package of R code and templates for course
 
-Install from Github
+### Install from Github
 
 `devtools::install_github("melindahiggins2000/N741pkg")`
 
 **NOTE 1:** You need to install the `devtools` package first to use the `devtools""install_github()` function.
 
 **NOTE 2:** This package also needs the `dplyr` package, be sure to also have `dplyr` installed, which is part of `tidyverse`.
+
+### Install from Github - build the vignettes and force updates
+
+`devtools::install_github("melindahiggins2000/N741pkg", build_vignettes=TRUE, force=TRUE)`
 
 View [Vignette Demo](https://htmlpreview.github.io/?https://raw.githubusercontent.com/melindahiggins2000/N741pkg/master/vignettes/vignette1.html)
 
